@@ -1,24 +1,26 @@
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
 
-class HCTreeTester {
+import static org.junit.Assert.*;
 
-    @org.junit.jupiter.api.Test
-    void getRoot() {
+public class HCTreeTester {
+
+    @Test
+    public void getRoot() {
     }
 
-    @org.junit.jupiter.api.Test
-    void setRoot() {
+    @Test
+    public void setRoot() {
     }
 
-    @org.junit.jupiter.api.Test
-    void buildTree() {
+    @Test
+    public void buildTree() {
     }
 
-    @org.junit.jupiter.api.Test
-    void encode() {
+    @Test
+    public void encode() {
     }
 
-    @org.junit.jupiter.api.Test
-    void decode() {
+    @Test
+    public void decode() {
     }
 }
