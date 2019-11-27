@@ -26,9 +26,9 @@ public class MyCompressor {
             //if compress, target the name and compress.
             for(int i = 2; i < args.length; i++){
                 File f = new File(args[i]);
-                String p1 = f.getPath().substring(0,f.getPath().length() - f.getName().length());
-                String n2 = "compressed_" + f.getName();
-                temp.compress(args[i],p1+2);
+                String path1 = f.getPath().substring(0,f.getPath().length() - f.getName().length());
+                String name2 = "compressed_" + f.getName();
+                temp.compress(args[i],path1+name2);
             }
         }
         //if decompress.
@@ -36,9 +36,9 @@ public class MyCompressor {
             //get the target name and ready to decompress.
             for (int i = 2; i < args.length; i++) {
                 File f = new File(args[i]);
-                String p1 = f.getPath().substring(0, f.getPath().length() - f.getName().length());
-                String n2 = "decompressed_" + f.getName();
-                temp.decompress(args[i],p1 + n2);
+                String path1 = f.getPath().substring(0, f.getPath().length() - f.getName().length());
+                String name2 = "decompressed_" + f.getName();
+                temp.decompress(args[i],path1 + name2);
             }
         }
 
