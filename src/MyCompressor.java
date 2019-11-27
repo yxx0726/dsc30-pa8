@@ -21,14 +21,14 @@ public class MyCompressor {
 
         //todo
         //run compression and decompression here
-        MyCompressor a = new MyCompressor(args[0]);
+        MyCompressor temp = new MyCompressor(args[0]);
         if(args[1].equals("compress")){
             //if compress, target the name and compress.
             for(int i = 2; i < args.length;i++){
                 File f = new File(args[i]);
                 String path1 = f.getPath().substring(0,f.getPath().length()-f.getName().length());
                 String name2 = "compressed_"+f.getName();
-                a.compress(args[i],path1+name2);
+                temp.compress(args[i],path1+name2);
             }
         }
         //if decompress.
@@ -38,7 +38,7 @@ public class MyCompressor {
                 File f = new File(args[i]);
                 String path1 = f.getPath().substring(0,f.getPath().length()-f.getName().length());
                 String name2 = "decompressed_"+f.getName();
-                a.decompress(args[i],path1+name2);
+                temp.decompress(args[i],path1+name2);
             }
         }
 
@@ -85,13 +85,13 @@ public class MyCompressor {
         //todo
         FileOutputStream comp = new FileOutputStream(compressedFile);
         DataOutputStream out  = new DataOutputStream(comp);
-        BitOutputStream bitOut = new BitOutputStream(out);
+        BitOutputStream bOut = new BitOutputStream(out);
         byte[] input = Files.readAllBytes( Paths.get(inputFile));
         out.writeInt(input.length);
         for(int i = 0; i < input.length;i++){
-            HuffmanTree.encode(input[i],bitOut);
+            HuffmanTree.encode(input[i],bOut);
         }
-        bitOut.flush();
+        bOut.flush();
         out.close();
         comp.close();
     }
