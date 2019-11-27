@@ -1,4 +1,7 @@
-
+/**
+ * name: Xin Yu
+ * PID: A14494949
+ */
 import java.io.*;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -158,6 +161,7 @@ public class HCTree {
 
     /**
      * todo: add javadoc
+     * get the root of the tree
     */
     public HCNode getRoot() {
         
@@ -167,6 +171,7 @@ public class HCTree {
 
     /**
      * todo: add javadoc
+     * change the root to the new one
     */
     public void setRoot(HCNode root) {
         this.root = root;
@@ -176,6 +181,7 @@ public class HCTree {
 
     /**
      * todo: add javadoc
+     * build the huffman tree
     */
     public void buildTree(int[] freq) {
         PriorityQueue<HCNode> que = new PriorityQueue<>();
@@ -211,7 +217,8 @@ public class HCTree {
     }
 
     /**
-     * todo: add javadoc
+     *For a given symbol, use the HCTree built before to find its
+     * encoding bits and write those bits to the given BitOutputStream.
     */
     public void encode(byte symbol, BitOutputStream out) throws IOException{
 
@@ -236,7 +243,8 @@ public class HCTree {
     }
 
     /**
-     * todo: add javadoc
+     * Decodes the bits from BitInputStream and returns a byte that represents
+     * the symbol that is encoded by a sequence of bits from BitInputStream.
     */
     public byte decode(BitInputStream in) throws IOException{
 
@@ -255,6 +263,16 @@ public class HCTree {
         }
         // found the leaf node and return the symbol
         return curr.getSymbol();
+    }
+    public void inorder (HCNode root) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.c0);
+        inorder(root.c1);
+        if (root.isLeaf()) {
+            System.out.println(root.toString());
+        }
     }
 
 }
