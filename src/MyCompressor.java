@@ -102,8 +102,7 @@ public class MyCompressor {
      * @param outputFile directory of uncompressed file.
      */
     public void decompress(String compressedFile, String outputFile) throws IOException {
-
-        //todo
+        
         FileInputStream inFile = new FileInputStream(compressedFile);
         DataInputStream in = new DataInputStream(inFile);
         BitInputStream bitIn = new BitInputStream(in);

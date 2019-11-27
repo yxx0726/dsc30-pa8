@@ -160,17 +160,14 @@ public class HCTree {
 
 
     /**
-     * todo: add javadoc
      * get the root of the tree
     */
     public HCNode getRoot() {
-        
         //todo
         return this.root;
     }
 
     /**
-     * todo: add javadoc
      * change the root to the new one
     */
     public void setRoot(HCNode root) {
@@ -185,25 +182,25 @@ public class HCTree {
     */
     public void buildTree(int[] freq) {
         PriorityQueue<HCNode> que = new PriorityQueue<>();
-        for(int i = 0;i<NUM_CHARS;i++){
+        for(int i = 0; i < NUM_CHARS; i++){
             HCNode local = null;
             //we only update leave if the frequency is not null
-            if(freq[i]!=0) {
+            if (freq[i] != 0) {
                 local = new HCNode((byte) i, freq[i]);
             }
             leaves[i] = local;
         }
-        for(HCNode node : leaves){
-            if(node!=null) {
+        for (HCNode node : leaves) {
+            if(node != null) {
                 que.offer(node);
             }
         }
-        while (que.size()>1){
+        while (que.size() > 1){
             HCNode first = que.remove();
             HCNode second = que.remove();
             //adding frequency
             HCNode newNode = new HCNode(first.getSymbol(),
-                    first.getFreq()+second.getFreq());
+                    first.getFreq() + second.getFreq());
             //setting children
             newNode.setC0(first);
             newNode.setC1(second);
@@ -220,7 +217,7 @@ public class HCTree {
      *For a given symbol, use the HCTree built before to find its
      * encoding bits and write those bits to the given BitOutputStream.
     */
-    public void encode(byte symbol, BitOutputStream out) throws IOException{
+    public void encode(byte symbol, BitOutputStream out) throws IOException {
 
         //todo
         int ascii = symbol & 0xff;
@@ -231,13 +228,13 @@ public class HCTree {
             if (target.getParent().getC0() == target) {
                 bits.add(0, 0);
             }
-            else if(target.getParent().getC1() == target){
+            else if (target.getParent().getC1() == target) {
                 bits.add(0, 1);
             }
             target = target.getParent();
         }
         //write out the bits
-        for(Integer i:bits){
+        for (Integer i:bits) {
             out.writeBit(i);
         }
     }
@@ -246,25 +243,29 @@ public class HCTree {
      * Decodes the bits from BitInputStream and returns a byte that represents
      * the symbol that is encoded by a sequence of bits from BitInputStream.
     */
-    public byte decode(BitInputStream in) throws IOException{
+    public byte decode(BitInputStream in) throws IOException {
 
         //todo
         HCNode curr = getRoot();
-        //going down to the leaf
-        while (! curr.isLeaf()){
+        //down to the leaf
+        while (!curr.isLeaf()) {
             int bit = in.readBit();
             //deciding where to go
-            if(bit == 0){
+            if (bit == 0) {
                 curr = curr.getC0();
             }
-            else if(bit == 1){
+            else if (bit == 1) {
                 curr = curr.getC1();
             }
         }
         // found the leaf node and return the symbol
         return curr.getSymbol();
     }
-    public void inorder (HCNode root) {
+    /**
+     * print the huffman tree in order for test
+     * @param root the root of the huffman tree.
+     */
+    public void inorder(HCNode root) {
         if (root == null) {
             return;
         }
